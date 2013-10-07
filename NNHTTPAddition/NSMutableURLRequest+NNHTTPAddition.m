@@ -36,7 +36,7 @@ static NSString * const kNNMultipartFormBoundary = @"Birthday19871006+60017891";
         if (contentType == NNPostContentTypeMultiPart) {
             NSData *body = [self _multiPartDataFromParameters:parameters];
             [request setHTTPBody:body];
-            [request setValue:[NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@",kCFBundleVersionKey] forHTTPHeaderField:@"Content-Type"];
+            [request setValue:[NSString stringWithFormat:@"multipart/form-data; charset=utf-8; boundary=%@",kNNMultipartFormBoundary] forHTTPHeaderField:@"Content-Type"];
         }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0

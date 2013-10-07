@@ -7,6 +7,7 @@
 //
 
 #import "NNAppDelegate.h"
+#import "NNViewController.h"
 
 @implementation NNAppDelegate
 
@@ -16,7 +17,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [UIViewController]
+    self.window.rootViewController = [NNViewController new];
     return YES;
 }
 
