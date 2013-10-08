@@ -42,7 +42,7 @@ static NSString * const kNNMultipartFormBoundary = @"Birthday19871006+60017891";
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_5_0
         if (contentType == NNPostContentTypeJSON) {
             NSError *error;
-            NSData *body = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONReadingAllowFragments error:&error];
+            NSData *body = [NSJSONSerialization dataWithJSONObject:parameters options:NSJSONWritingPrettyPrinted error:&error];
             if (!error) {
                 [request setHTTPBody:body];
                 [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
@@ -63,13 +63,13 @@ static NSString * const kNNMultipartFormBoundary = @"Birthday19871006+60017891";
     NSMutableArray *queries = @[].mutableCopy;
     for (NSString *key in parameters) {
         NSString *value = parameters[key];
-        NSString *escapedValue = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(
+        NSString *escapedValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                                                             NULL,
                                                             (__bridge CFStringRef)value,
                                                             NULL,
                                                             (CFStringRef)@"!*'();:@&=+$,/?%#[]",
                                                             kCFStringEncodingUTF8
-                                                            );
+                                                            ));
         [queries addObject:[NSString stringWithFormat:@"%@=%@", key, escapedValue]];
     }
     return [queries componentsJoinedByString:@"&"];
