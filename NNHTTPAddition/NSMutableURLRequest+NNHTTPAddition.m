@@ -62,7 +62,7 @@ static NSString * const kNNMultipartFormBoundary = @"Birthday19871006+60017891";
 {
     NSMutableArray *queries = @[].mutableCopy;
     for (NSString *key in parameters) {
-        NSString *value = parameters[key];
+        NSString *value = ([parameters[key] isKindOfClass:[NSString class]])?parameters[key]:[parameters[key]stringValue];
         NSString *escapedValue = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
                                                             NULL,
                                                             (__bridge CFStringRef)value,
